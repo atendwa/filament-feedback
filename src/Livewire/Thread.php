@@ -9,9 +9,11 @@ use Atendwa\Feedback\Models\Feedback;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\RateLimiter;
+use InvalidArgumentException;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use RuntimeException;
 
 #[Layout(name: 'feedback::layouts.public')]
 #[Title(content: 'Your feedback')]
@@ -28,6 +30,10 @@ class Thread extends Component
         $this->feedback = $feedback;
     }
 
+    /**
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     */
     public function reply(): void
     {
         $data = (array) $this->validate(['body' => ['required', 'string', 'min:2', 'max:5000']]);

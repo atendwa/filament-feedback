@@ -53,10 +53,7 @@ final class GiveFeedback extends Action
             TextInput::make('title')->label('Subject')->required()->maxLength(120),
             Textarea::make('message')->label('Your feedback')->required()->minLength(10)->maxLength(5000)->rows(6),
             $this->visibilityField(),
-            Callout::make('Anonymous is not untraceable')
-                ->description('Staff will never see your name, but your account is recorded privately so abuse can be stopped. Only a system administrator with direct database access could look it up. Your only way back to an anonymous conversation is the private link.')
-                ->warning()
-                ->visible($anonymous),
+            $this->anonymityNotice()->visible($anonymous),
             Toggle::make('wants_replies')
                 ->label('I want to read replies and follow up')
                 ->live()
@@ -67,6 +64,13 @@ final class GiveFeedback extends Action
                 ->helperText('Optional. Without it the link is shown once after you send.')
                 ->visible(fn (Get $get): bool => $anonymous($get) && (bool) $get('wants_replies')),
         ];
+    }
+
+    private function anonymityNotice(): Callout
+    {
+        return Callout::make('Anonymous is not untraceable')
+            ->description('Staff will never see your name, but your account is recorded privately so abuse can be stopped. Only a system administrator with direct database access could look it up. Your only way back to an anonymous conversation is the private link.')
+            ->warning();
     }
 
     private function visibilityField(): Radio

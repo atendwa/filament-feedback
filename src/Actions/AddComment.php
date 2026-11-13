@@ -8,12 +8,14 @@ use Atendwa\Feedback\Enums\Status;
 use Atendwa\Feedback\Models\Feedback;
 use Atendwa\Feedback\Models\FeedbackComment;
 use Illuminate\Database\Eloquent\Model;
+use InvalidArgumentException;
 use RuntimeException;
 
 final class AddComment
 {
     /**
      * @throws RuntimeException
+     * @throws InvalidArgumentException
      */
     public function handle(
         Feedback $feedback,
@@ -24,14 +26,7 @@ final class AddComment
     ): FeedbackComment {
         $fromSubmitter = ! $staff instanceof Model;
 
-        throw_if(
-            $fromSubmitter && ! $feedback->canBeRepliedTo(),
-            'This conversation is not open for replies.',
-        );
-        throw_if(
-            ! $fromSubmitter && ! $internal && ! $feedback->wants_replies,
-            'The submitter chose not to receive replies, so only internal notes can be added.',
-        );
+        $this->ensureAllowed($feedback, $fromSubmitter, $internal);
 
         $comment = $feedback->comments()->create([
             'user_id' => $staff?->getKey(),
@@ -46,6 +41,21 @@ final class AddComment
         (new AnnounceComment)->handle($feedback, $comment, $fromSubmitter, $internal, $resolving);
 
         return $comment;
+    }
+
+    /**
+     * @throws RuntimeException
+     */
+    private function ensureAllowed(Feedback $feedback, bool $fromSubmitter, bool $internal): void
+    {
+        throw_if(
+            $fromSubmitter && ! $feedback->canBeRepliedTo(),
+            'This conversation is not open for replies.',
+        );
+        throw_if(
+            ! $fromSubmitter && ! $internal && ! $feedback->wants_replies,
+            'The submitter chose not to receive replies, so only internal notes can be added.',
+        );
     }
 
     private function reopenIfFinished(Feedback $feedback, bool $fromSubmitter): void
