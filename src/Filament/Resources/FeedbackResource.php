@@ -84,6 +84,9 @@ class FeedbackResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return InboxTable::configure($table, fn (Feedback $record): string => static::getUrl('view', ['record' => $record]));
+        return InboxTable::configure(
+            $table,
+            fn (Feedback $record): string => static::getUrl('view', ['record' => $record]),
+        );
     }
 }

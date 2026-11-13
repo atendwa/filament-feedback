@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use InvalidArgumentException;
 
 /**
  * @property int $id
@@ -57,6 +58,8 @@ class Feedback extends Model
 
     /**
      * @return BelongsTo<Model, $this>
+     *
+     * @throws InvalidArgumentException
      */
     public function user(): BelongsTo
     {

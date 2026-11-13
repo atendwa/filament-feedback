@@ -8,9 +8,13 @@ use Atendwa\Feedback\Enums\Status;
 use Atendwa\Feedback\Models\Feedback;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 final class ChangeStatus
 {
+    /**
+     * @throws Throwable
+     */
     public function resolve(Feedback $feedback, string $comment, Model $staff): void
     {
         DB::transaction(function () use ($feedback, $comment, $staff): void {

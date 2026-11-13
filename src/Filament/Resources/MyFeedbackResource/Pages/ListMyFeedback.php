@@ -18,6 +18,8 @@ class ListMyFeedback extends ListRecords
      */
     protected function getHeaderActions(): array
     {
-        return [GiveFeedback::make()->color('primary')];
+        return [
+            GiveFeedback::make()->color('primary'),
+        ];
     }
 }

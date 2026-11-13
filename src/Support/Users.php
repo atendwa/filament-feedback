@@ -11,6 +11,8 @@ final class Users
 {
     /**
      * @return class-string<Model>
+     *
+     * @throws InvalidArgumentException
      */
     public static function model(): string
     {

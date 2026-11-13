@@ -6,6 +6,7 @@ namespace Atendwa\Feedback\Support;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
+use InvalidArgumentException;
 use Throwable;
 
 final class Responders
@@ -14,6 +15,8 @@ final class Responders
 
     /**
      * @return list<Model>
+     *
+     * @throws InvalidArgumentException
      */
     public static function all(): array
     {

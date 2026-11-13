@@ -83,6 +83,8 @@ class SubmitForm extends Component
 
     public function render(): View
     {
-        return view('feedback::livewire.submit-form', ['categories' => config()->array('feedback.categories')]);
+        return view('feedback::livewire.submit-form', [
+            'categories' => config()->array('feedback.categories'),
+        ]);
     }
 }

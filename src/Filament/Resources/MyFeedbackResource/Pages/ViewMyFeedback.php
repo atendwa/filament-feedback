@@ -40,6 +40,9 @@ class ViewMyFeedback extends ViewRecord
         ];
     }
 
+    /**
+     * @throws LogicException
+     */
     private function feedback(): Feedback
     {
         $record = $this->getRecord();
