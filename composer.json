@@ -1,7 +1,13 @@
 {
     "name": "atendwa/filament-feedback",
     "description": "Feedback for Filament apps: a public form with anonymous or named submissions, a staff inbox with replies, internal notes and resolution, and \"My feedback\" for signed-in users.",
-    "keywords": ["laravel", "filament", "filament-plugin", "feedback", "helpdesk"],
+    "keywords": [
+        "laravel",
+        "filament",
+        "filament-plugin",
+        "feedback",
+        "helpdesk"
+    ],
     "homepage": "https://github.com/atendwa/filament-feedback",
     "license": "MIT",
     "authors": [
@@ -65,6 +71,15 @@
             "pestphp/pest-plugin": true,
             "phpstan/extension-installer": true,
             "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "policy": {
+            "cooldown": {
+                "period": "48 hours",
+                "ignore": [
+                    "strathmore/*",
+                    "atendwa/*"
+                ]
+            }
         }
     },
     "minimum-stability": "stable",
