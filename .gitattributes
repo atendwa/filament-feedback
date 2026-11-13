@@ -8,3 +8,4 @@
 /pint.json export-ignore
 /rector.php export-ignore
 /phpstan-bootstrap.php export-ignore
+/phpinsights.php export-ignore

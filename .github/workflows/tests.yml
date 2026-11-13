@@ -29,6 +29,9 @@ jobs:
       - name: Rector
         run: vendor/bin/rector --dry-run --no-diffs
 
+      - name: PHP Insights
+        run: vendor/bin/phpinsights analyse src --config-path=phpinsights.php --no-interaction --format=json --summary --min-quality=90 --min-complexity=90 --min-architecture=90 --min-style=90
+
       - name: PHPStan
         run: vendor/bin/phpstan analyse --memory-limit=1G --no-progress
 
