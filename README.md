@@ -1,19 +1,22 @@
-# Filament Feedback
+# atendwa/filament-feedback
 
-[![Latest Version](https://img.shields.io/packagist/v/atendwa/filament-feedback)](https://packagist.org/packages/atendwa/filament-feedback)
-[![PHP](https://img.shields.io/packagist/dependency-v/atendwa/filament-feedback/php)](composer.json)
-[![Laravel](https://img.shields.io/packagist/dependency-v/atendwa/filament-feedback/illuminate%2Fsupport?label=laravel)](composer.json)
-[![Filament](https://img.shields.io/packagist/dependency-v/atendwa/filament-feedback/filament%2Ffilament?label=filament)](composer.json)
-[![Tests](https://github.com/atendwa/filament-feedback/actions/workflows/tests.yml/badge.svg?branch=develop)](https://github.com/atendwa/filament-feedback/actions/workflows/tests.yml)
+[![PHP](https://img.shields.io/packagist/dependency-v/atendwa/filament-feedback/php?label=php&color=777BB4)](composer.json)
+[![Laravel](https://img.shields.io/packagist/dependency-v/atendwa/filament-feedback/illuminate%2Fsupport?label=laravel&color=FF2D20)](composer.json)
+[![Filament](https://img.shields.io/packagist/dependency-v/atendwa/filament-feedback/filament%2Ffilament?label=filament&color=FDAE4B)](composer.json)
+[![Release](https://img.shields.io/packagist/v/atendwa/filament-feedback?label=release&color=007EC6)](https://packagist.org/packages/atendwa/filament-feedback)
+[![CI](https://github.com/atendwa/filament-feedback/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/atendwa/filament-feedback/actions/workflows/ci.yml)
 
-Feedback for Filament applications, in three parts:
+Collects feedback from the people who use a Filament application and lets staff answer it. It has three parts:
 
 - **A public form** at `/give-feedback` that anyone can use, signed in or not. People can stay anonymous (they are shown under a
   generated nickname), and can choose to get replies by email through a private, signed link to the conversation.
 - **A staff inbox** (Filament resource) to read feedback, reply, add internal notes, resolve with a closing comment and reopen.
 - **"My feedback"** (Filament resource) where signed-in people see what they sent under their name and continue the conversation.
 
-Filament 5, Laravel 12 or 13, PHP 8.3+.
+## Requirements
+
+PHP 8.3 or later, Laravel 12 or 13 and Filament 5. The user model needs `name` and `email` attributes; to receive in-app
+replies it uses Laravel's `Notifiable` trait.
 
 ## Installation
 
@@ -36,23 +39,9 @@ $panel->plugins([
 ]);
 ```
 
-`FeedbackPlugin` options: `inboxOnly()`, `mineOnly()`, `loginLink()`, `cluster(SomeCluster::class)`, `navigationGroup('Support')`, `sort(10)`.
-
-## Permissions
-
-The inbox is guarded by a policy that checks these abilities with `$user->can(...)`, so any authorization setup works
-(Filament Shield, spatie/laravel-permission, or your own gates):
-
-| Ability | Allows |
-|---|---|
-| `ViewAny:Feedback` | open the inbox |
-| `View:Feedback` | open any feedback (people can always open their own named feedback) |
-| `Respond:Feedback` | reply, add notes, resolve and reopen |
-
-If your user model uses spatie/laravel-permission, everyone with `Respond:Feedback` is also alerted (in the app and by email)
-about new feedback and replies.
-
 ## Configuration
+
+`FeedbackPlugin` options: `inboxOnly()`, `mineOnly()`, `loginLink()`, `cluster(SomeCluster::class)`, `navigationGroup('Support')`, `sort(10)`.
 
 Values can be set in a `config/feedback.php` of your own or at runtime with `config([...])`.
 
@@ -70,7 +59,37 @@ Values can be set in a `config/feedback.php` of your own or at runtime with `con
 | `feedback.public.logo` | `null` | logo path for the public page; the app name is shown when empty |
 | `feedback.public.decoration` | `null` | Blade component shown beside the public form on large screens |
 
-The user model needs `name` and `email` attributes; to receive in-app replies it should use Laravel's `Notifiable` trait.
+## Usage
+
+- Staff work in the inbox: reply to the submitter, add internal notes, resolve with a closing comment, or reopen.
+- Signed-in people find what they sent under "My feedback" and continue the conversation there.
+- Anyone can use the public form at `feedback.path`; `loginLink()` puts a "Give feedback" link under the login form.
+- To offer the form inside a panel, add the action to a page's header actions:
+
+```php
+use Atendwa\Feedback\Filament\Actions\GiveFeedback;
+
+protected function getHeaderActions(): array
+{
+    return [
+        GiveFeedback::make(),
+    ];
+}
+```
+
+## Extending
+
+The inbox is guarded by a policy that checks these abilities with `$user->can(...)`, so any authorization setup works
+(Filament Shield, spatie/laravel-permission, or your own gates):
+
+| Ability | Allows |
+|---|---|
+| `ViewAny:Feedback` | open the inbox |
+| `View:Feedback` | open any feedback (people can always open their own named feedback) |
+| `Respond:Feedback` | reply, add notes, resolve and reopen |
+
+If your user model uses spatie/laravel-permission, everyone with `Respond:Feedback` is also alerted (in the app and by email)
+about new feedback and replies.
 
 ## Testing
 
@@ -78,6 +97,10 @@ The user model needs `name` and `email` attributes; to receive in-app replies it
 composer install
 composer quality   # Pint, Rector, PHPStan (max), Pest
 ```
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
