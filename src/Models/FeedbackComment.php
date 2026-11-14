@@ -8,6 +8,7 @@ use Atendwa\Feedback\Support\Users;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
+use InvalidArgumentException;
 
 /**
  * @property int $id
@@ -32,6 +33,8 @@ class FeedbackComment extends Model
 
     /**
      * @return BelongsTo<Model, $this>
+     *
+     * @throws InvalidArgumentException
      */
     public function user(): BelongsTo
     {
@@ -52,6 +55,9 @@ class FeedbackComment extends Model
      */
     protected function casts(): array
     {
-        return ['is_from_submitter' => 'boolean', 'is_internal' => 'boolean'];
+        return [
+            'is_from_submitter' => 'boolean',
+            'is_internal' => 'boolean',
+        ];
     }
 }

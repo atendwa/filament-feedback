@@ -12,9 +12,15 @@ use Atendwa\Feedback\Notifications\TeamAlert;
 use Atendwa\Feedback\Support\Responders;
 use Atendwa\Feedback\Support\TeamInbox;
 use Illuminate\Support\Facades\Notification;
+use InvalidArgumentException;
+use RuntimeException;
 
 final class AnnounceComment
 {
+    /**
+     * @throws InvalidArgumentException
+     * @throws RuntimeException
+     */
     public function handle(Feedback $feedback, FeedbackComment $comment, bool $fromSubmitter, bool $internal, bool $resolving): void
     {
         if ($fromSubmitter) {

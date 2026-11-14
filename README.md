@@ -1,5 +1,11 @@
 # Filament Feedback
 
+[![Latest Version](https://img.shields.io/packagist/v/atendwa/filament-feedback)](https://packagist.org/packages/atendwa/filament-feedback)
+[![PHP](https://img.shields.io/packagist/dependency-v/atendwa/filament-feedback/php)](composer.json)
+[![Laravel](https://img.shields.io/packagist/dependency-v/atendwa/filament-feedback/illuminate%2Fsupport?label=laravel)](composer.json)
+[![Filament](https://img.shields.io/packagist/dependency-v/atendwa/filament-feedback/filament%2Ffilament?label=filament)](composer.json)
+[![Tests](https://github.com/atendwa/filament-feedback/actions/workflows/tests.yml/badge.svg?branch=develop)](https://github.com/atendwa/filament-feedback/actions/workflows/tests.yml)
+
 Feedback for Filament applications, in three parts:
 
 - **A public form** at `/give-feedback` that anyone can use, signed in or not. People can stay anonymous (they are shown under a
