@@ -4,7 +4,8 @@
 [![Laravel](https://img.shields.io/packagist/dependency-v/atendwa/filament-feedback/illuminate%2Fsupport?label=laravel&color=FF2D20)](composer.json)
 [![Filament](https://img.shields.io/packagist/dependency-v/atendwa/filament-feedback/filament%2Ffilament?label=filament&color=FDAE4B)](composer.json)
 [![Release](https://img.shields.io/packagist/v/atendwa/filament-feedback?label=release&color=007EC6)](https://packagist.org/packages/atendwa/filament-feedback)
-[![CI](https://github.com/atendwa/filament-feedback/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/atendwa/filament-feedback/actions/workflows/ci.yml)
+[![Tests](https://github.com/atendwa/filament-feedback/actions/workflows/tests.yml/badge.svg?branch=develop)](https://github.com/atendwa/filament-feedback/actions/workflows/tests.yml)
+[![Quality](https://github.com/atendwa/filament-feedback/actions/workflows/quality.yml/badge.svg?branch=develop)](https://github.com/atendwa/filament-feedback/actions/workflows/quality.yml)
 
 Collects feedback from the people who use a Filament application and lets staff answer it. It has three parts:
 
