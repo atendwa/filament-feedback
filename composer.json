@@ -30,6 +30,7 @@
         "pestphp/pest-plugin-arch": "^4.0",
         "pestphp/pest-plugin-laravel": "^4.0",
         "pestphp/pest-plugin-livewire": "^4.0",
+        "projektgopher/whisky": "^0.7.4",
         "rector/rector": "^2.0",
         "spatie/laravel-permission": "^6.0"
     },
