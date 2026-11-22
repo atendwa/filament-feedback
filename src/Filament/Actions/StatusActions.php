@@ -25,7 +25,7 @@ final class StatusActions
      */
     public static function resolve(Closure $feedback): Action
     {
-        return Action::make('resolve')->label('Resolve')->icon('heroicon-o-check-circle')->color('success')
+        return Action::make('resolve')->label('Resolve')->icon('heroicon-o-check-circle')->color('gray')
             ->visible(fn (): bool => Gate::allows('respond', Feedback::class) && $feedback()->status === Status::Open)
             ->modalDescription(fn (): string => $feedback()->wants_replies ? 'Your comment is sent to the submitter as the last reply.' : 'The submitter opted out of replies, so your comment is kept as an internal note.')
             ->schema([Textarea::make('comment')->label('Resolution comment')->required()->rows(6)->maxLength(5000)])
